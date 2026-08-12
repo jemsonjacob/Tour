@@ -1,0 +1,13 @@
+class ApiConstants {
+  static const String apiKey =
+      "QG3PZR3PHERHRPS1MXMRFW0W1QIXQDNAWYVJZBJL3DOIIKH5";
+  static const String baseUrl = "https://places-api.foursquare.com";
+}
+
+//logger.i(response.data);
+
+
+//5ae2e3f221c38a28845f05b6cf7a0f0538ad6f101c71cba40f8a81e6
+//four MILCZ2MJLGBT2NQP2G3M1V1WSYG1MLPEWLBFJYRFZ31NTCYV
+//new
+//QG3PZR3PHERHRPS1MXMRFW0W1QIXQDNAWYVJZBJL3DOIIKH5

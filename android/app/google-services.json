@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "1029365395735",
+    "project_id": "authproject-6f0da",
+    "storage_bucket": "authproject-6f0da.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029365395735:android:acf76f595fd6874f104752",
+        "android_client_info": {
+          "package_name": "com.example.fireauthproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029365395735-sidr62qhd1idsafkmm3k8q8bld2nn7on.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fireauthproject",
+            "certificate_hash": "1dacf7cd754900f658c757226a4c98184a6188f6"
+          }
+        },
+        {
+          "client_id": "1029365395735-92os4n2e7lmd356c7cpc84fg8fqgeqcd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUU1g4k84qUMl7fZsKa8wB_3K0OgQWrPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029365395735-92os4n2e7lmd356c7cpc84fg8fqgeqcd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1029365395735-5eknl95d7371qujobmt5ru5jdnububdu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fireauthproject"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029365395735:android:a572228c56d36090104752",
+        "android_client_info": {
+          "package_name": "com.example.tourexplorer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029365395735-92os4n2e7lmd356c7cpc84fg8fqgeqcd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUU1g4k84qUMl7fZsKa8wB_3K0OgQWrPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029365395735-92os4n2e7lmd356c7cpc84fg8fqgeqcd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1029365395735-5eknl95d7371qujobmt5ru5jdnububdu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fireauthproject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
