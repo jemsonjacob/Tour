@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tourexplorer/core/custom/app_colors.dart';
-import 'package:tourexplorer/core/custom/app_text_style.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -29,16 +28,22 @@ class HomeHeader extends StatelessWidget {
           children: [
             Text(
               getGreeting(),
-              style: const TextStyle(color: AppColors.greyColor, fontSize: 16),
+              style: const TextStyle(
+                color: AppColors.whiteColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            const SizedBox(height: 4),
-            Text('Hi, Jemson 👋', style: AppTextStyles.heading1),
+            const SizedBox(height: 8),
+            Text(
+              'Hi, Jemson 👋',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
-        ),
-        const CircleAvatar(
-          radius: 24,
-          backgroundColor: AppColors.gradient3,
-          child: Icon(Icons.person, color: AppColors.whiteColor),
         ),
       ],
     );

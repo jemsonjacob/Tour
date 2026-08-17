@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tourexplorer/core/custom/app_colors.dart';
 import 'package:tourexplorer/core/custom/app_sizes.dart';
 import 'package:tourexplorer/core/custom/app_text_style.dart';
@@ -9,9 +10,7 @@ import 'package:tourexplorer/feature/explore/presentation/bloc/explore_state.dar
 import 'package:tourexplorer/feature/home/presentation/widgets/category_chip.dart';
 import 'package:tourexplorer/feature/home/presentation/widgets/home_searchbar.dart';
 import 'package:tourexplorer/feature/home/presentation/widgets/destination_card.dart';
-import 'package:tourexplorer/feature/place_details/presentation/bloc/place_details_bloc.dart';
 import 'package:tourexplorer/feature/place_details/presentation/pages/place_details_page.dart';
-import 'package:tourexplorer/injection_container.dart';
 
 class ExploreScreen extends StatefulWidget {
   final String? initialQuery;
@@ -124,9 +123,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
               BlocBuilder<ExploreBloc, ExploreState>(
                 builder: (context, state) {
                   if (state is ExploreLoading) {
-                    return const SizedBox(
-                      height: 300,
-                      child: Center(child: CircularProgressIndicator()),
+                    return SizedBox(
+                      height: 220,
+                      child: Center(
+                        child: Lottie.asset("assets/animations/Travel.json"),
+                      ),
                     );
                   }
 
@@ -141,7 +142,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     if (state.places.isEmpty) {
                       return const SizedBox(
                         height: 300,
-                        child: Center(child: Text('No places found')),
+                        child: Center(
+                          child: Text(
+                            'No places found',
+                            style: TextStyle(color: AppColors.backgroundColor),
+                          ),
+                        ),
                       );
                     }
 
@@ -159,15 +165,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => BlocProvider(
-                                  create: (_) => sl<PlaceDetailsBloc>()
-                                    ..add(
-                                      GetPlaceDetailsEvent(placeId: place.id),
-                                    ),
-                                  child: PlaceDetailsScreen(
-                                    placeDetails: place,
-                                  ),
-                                ),
+                                builder: (context) =>
+                                    PlaceDetailsScreen(placeDetails: place),
                               ),
                             );
                           },

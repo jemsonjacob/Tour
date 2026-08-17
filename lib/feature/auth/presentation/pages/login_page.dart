@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tourexplorer/core/custom/app_colors.dart';
@@ -5,6 +6,7 @@ import 'package:tourexplorer/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:tourexplorer/feature/auth/presentation/pages/signup_page.dart';
 import 'package:tourexplorer/feature/auth/presentation/widgets/auth_field.dart';
 import 'package:tourexplorer/feature/auth/presentation/widgets/auth_gradient_button.dart';
+import 'package:tourexplorer/feature/home/presentation/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -48,11 +50,10 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            ScaffoldMessenger.of(
+            Navigator.pushReplacement(
               context,
-            ).showSnackBar(const SnackBar(content: Text('Login successful')));
-
-            // We'll navigate to HomeScreen here later.
+              MaterialPageRoute(builder: (context) => const MainScreen()),
+            );
           }
           if (state is AuthFailure) {
             ScaffoldMessenger.of(
@@ -99,9 +100,8 @@ class _LoginPageState extends State<LoginPage> {
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       if (state is AuthLoading) {
-                        return const CircularProgressIndicator();
+                        return const CupertinoActivityIndicator();
                       }
-
                       return AuthGradientButton(
                         buttonText: 'Sign In',
                         onPressed: _login,

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:tourexplorer/core/custom/app_colors.dart';
 import 'package:tourexplorer/core/custom/app_text_style.dart';
 import 'package:tourexplorer/feature/home/domain/entities/place_entity.dart';
+import 'package:tourexplorer/feature/home/presentation/widgets/category_images.dart';
 
 class RecommendationCard extends StatelessWidget {
   final PlaceEntity place;
+
   const RecommendationCard({super.key, required this.place});
 
   @override
@@ -17,33 +19,89 @@ class RecommendationCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Row(
           children: [
-            // ClipRRect(
-            //   borderRadius: BorderRadius.circular(12),
-            //   child: Image.asset(
-            //     place.category.iconUrl,
-            //     width: 90,
-            //     height: 90,
-            //     fit: BoxFit.cover,
-            //   ),
-            // ),
+            // Category Image
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                CategoryImages.getImage(place.category.name),
+                width: 90,
+                height: 90,
+                fit: BoxFit.cover,
+              ),
+            ),
             const SizedBox(width: 15),
+            // Place Information
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(place.name, style: AppTextStyles.heading2),
+                  Text(
+                    place.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyles.body,
+                  ),
                   const SizedBox(height: 5),
-                  Text(place.location.region),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.location_on_outlined,
+                        size: 15,
+                        color: AppColors.backgroundColor,
+                      ),
+                      const SizedBox(width: 3),
+                      Expanded(
+                        child: Text(
+                          place.location.locality.isNotEmpty
+                              ? place.location.locality
+                              : place.location.region,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: AppColors.backgroundColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Text("${place.distance} Ratings"),
-                      const Spacer(),
+                      // Distance
+                      const Icon(
+                        Icons.near_me_outlined,
+                        size: 14,
+                        color: AppColors.backgroundColor,
+                      ),
+                      const SizedBox(width: 3),
                       Text(
-                        place.category.shortName,
+                        '${place.distance.round()} m away',
                         style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontSize: 11,
                           color: AppColors.backgroundColor,
+                        ),
+                      ),
+                      const Spacer(),
+                      // Category
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 7,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundColor.withAlpha(25),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          place.category.shortName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.backgroundColor,
+                          ),
                         ),
                       ),
                     ],

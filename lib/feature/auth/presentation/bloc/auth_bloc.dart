@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:tourexplorer/feature/auth/domain/entities/user.dart';
+import 'package:tourexplorer/feature/auth/domain/repository/auth_repository.dart';
 import 'package:tourexplorer/feature/auth/domain/usecase/login_usecase.dart';
 import 'package:tourexplorer/feature/auth/domain/usecase/logout_usecase.dart';
 import 'package:tourexplorer/feature/auth/domain/usecase/signup_usecase.dart';
@@ -13,15 +14,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignUpUseCase _signUpUseCase;
   final LoginUseCase _loginUseCase;
   final LogoutUseCase _logoutUseCase;
+  final AuthRepository _authRepository;
 
   AuthBloc({
-    required SignUpUseCase signUpUseCase,
-    required LoginUseCase loginUseCase,
-    required LogoutUseCase logoutUseCase,
-  }) : _signUpUseCase = signUpUseCase,
-       _loginUseCase = loginUseCase,
-       _logoutUseCase = logoutUseCase,
-       super(AuthInitial()) {
+    required this._signUpUseCase,
+    required this._loginUseCase,
+    required this._logoutUseCase,
+    required this._authRepository,
+  }) : super(AuthInitial()) {
     //singup event
     on<AuthSignUpEvent>((event, emit) async {
       emit(AuthLoading());
@@ -52,6 +52,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         (failure) => emit(AuthFailure(message: failure.message)),
         (user) => emit(AuthSuccess(user: user)),
       );
+    });
+
+    //auth check
+    on<AuthCheckEvent>((event, emit) {
+      final user = _authRepository.getCurrentUser();
+
+      if (user != null) {
+        emit(AuthSuccess(user: user));
+      } else {
+        emit(AuthLoggedOut());
+      }
     });
     //logout event
     on<AuthLogoutEvent>((event, emit) async {

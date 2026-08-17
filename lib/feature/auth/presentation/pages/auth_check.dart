@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tourexplorer/feature/auth/presentation/pages/login_page.dart';
 import 'package:tourexplorer/feature/home/presentation/pages/main_page.dart';
@@ -14,7 +15,7 @@ class AuthCheck extends StatelessWidget {
         // Firebase is checks authentication
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
+            body: Center(child: CupertinoActivityIndicator()),
           );
         }
 

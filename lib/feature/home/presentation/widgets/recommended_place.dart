@@ -5,6 +5,7 @@ import 'package:tourexplorer/core/custom/app_sizes.dart';
 
 import 'package:tourexplorer/feature/home/presentation/bloc/home_bloc.dart';
 import 'package:tourexplorer/feature/home/presentation/widgets/recommendation_card.dart';
+import 'package:tourexplorer/feature/place_details/presentation/pages/place_details_page.dart';
 
 class RecommendedPlaces extends StatelessWidget {
   const RecommendedPlaces({super.key});
@@ -17,21 +18,39 @@ class RecommendedPlaces extends StatelessWidget {
           return const SizedBox();
         }
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Recommended For You',
-              style: TextStyle(fontSize: 20, color: AppColors.backgroundColor),
-            ),
-            const SizedBox(height: AppSizes.md),
-            ...state.recommendedPlaces.map(
-              (place) => Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: RecommendationCard(place: place),
+        return Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Recommended For You',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.backgroundColor,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: AppSizes.md),
+              ...state.recommendedPlaces.map(
+                (place) => Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PlaceDetailsScreen(placeDetails: place),
+                        ),
+                      );
+                    },
+                    child: RecommendationCard(place: place),
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

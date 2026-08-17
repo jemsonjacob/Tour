@@ -1,105 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tourexplorer/core/custom/app_colors.dart';
 import 'package:tourexplorer/core/custom/app_sizes.dart';
 import 'package:tourexplorer/core/custom/app_text_style.dart';
 import 'package:tourexplorer/feature/home/presentation/bloc/home_bloc.dart';
 import 'package:tourexplorer/feature/home/presentation/widgets/destination_card.dart';
-import 'package:tourexplorer/feature/place_details/presentation/bloc/place_details_bloc.dart';
 import 'package:tourexplorer/feature/place_details/presentation/pages/place_details_page.dart';
-import 'package:tourexplorer/injection_container.dart';
 
 class PopularDestinations extends StatelessWidget {
   const PopularDestinations({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Popular Places', style: AppTextStyles.heading1),
-        const SizedBox(height: AppSizes.md),
-        BlocBuilder<HomeBloc, HomeState>(
-          builder: (context, state) {
-            if (state is HomeLocationRequired) {
-              _showLocationDialog(
-                context,
-                permanentlyDenied: state.permissionPermanentlyDenied,
-              );
-            }
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Popular Places', style: AppTextStyles.heading1),
+          const SizedBox(height: AppSizes.md),
+          BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              if (state is HomeLocationRequired) {
+                _showLocationDialog(
+                  context,
+                  permanentlyDenied: state.permissionPermanentlyDenied,
+                );
+              }
 
-            if (state is HomeLoading) {
-              return const SizedBox(
-                height: 220,
-                child: Center(child: CircularProgressIndicator()),
-              );
-            }
-
-            if (state is HomeError) {
-              return SizedBox(
-                height: 220,
-                child: Center(
-                  child: Text(
-                    state.message,
-                    style: TextStyle(color: AppColors.backgroundColor),
+              if (state is HomeLoading) {
+                return SizedBox(
+                  height: 220,
+                  child: Center(
+                    child: Lottie.asset("assets/animations/Travel.json"),
                   ),
-                ),
-              );
-            }
+                );
+              }
 
-            if (state is HomeLoaded) {
-              if (state.popularPlaces.isEmpty) {
-                return const SizedBox(
+              if (state is HomeError) {
+                return SizedBox(
                   height: 220,
                   child: Center(
                     child: Text(
-                      'No places found',
+                      state.message,
                       style: TextStyle(color: AppColors.backgroundColor),
                     ),
                   ),
                 );
               }
 
-              return SizedBox(
-                height: 220,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.popularPlaces.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 16),
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        // print(state.places[index].runtimeType);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider(
-                              create: (_) => sl<PlaceDetailsBloc>()
-                                ..add(
-                                  GetPlaceDetailsEvent(
-                                    placeId: state.popularPlaces[index].id,
-                                  ),
-                                ),
-                              child: PlaceDetailsScreen(
+              if (state is HomeLoaded) {
+                if (state.popularPlaces.isEmpty) {
+                  return const SizedBox(
+                    height: 220,
+                    child: Center(
+                      child: Text(
+                        'No places found',
+                        style: TextStyle(color: AppColors.backgroundColor),
+                      ),
+                    ),
+                  );
+                }
+
+                return SizedBox(
+                  height: 220,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.popularPlaces.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 16),
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          // print(state.places[index].runtimeType);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PlaceDetailsScreen(
                                 placeDetails: state.popularPlaces[index],
                               ),
                             ),
-                          ),
-                        );
-                      },
-                      child: DestinationCard(place: state.popularPlaces[index]),
-                    );
-                  },
-                ),
-              );
-            }
+                          );
+                        },
+                        child: DestinationCard(
+                          place: state.popularPlaces[index],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
 
-            return const SizedBox();
-          },
-        ),
-      ],
+              return const SizedBox();
+            },
+          ),
+        ],
+      ),
     );
   }
 
