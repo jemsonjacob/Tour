@@ -112,7 +112,7 @@ Future<void> initDependencies() async {
       authRepository: sl<AuthRepository>(),
     ),
   );
-  //to get fresh bloc
+  //to get fresh bloc registerfactory used
   sl.registerFactory<HomeBloc>(
     () => HomeBloc(
       getPlacesUseCase: sl<GetPlacesUseCase>(),

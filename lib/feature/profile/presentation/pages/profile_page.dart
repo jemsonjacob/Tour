@@ -55,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
         _buildProfileHeader(user),
         const SizedBox(height: 12),
         const AboutListTile(
-          icon: Icon(Icons.info_outline),
+          icon: Icon(Icons.info_outline, color: Colors.black),
           applicationName: "Travel Explore",
           applicationVersion: "1.0.0",
           applicationLegalese: "© 2026 Jemson Jacob",
@@ -107,6 +107,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  // ignore: unused_element
   Widget _buildProfileOption({
     required IconData icon,
     required String title,

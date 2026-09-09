@@ -7,6 +7,7 @@ import 'package:tourexplorer/feature/auth/domain/entities/user.dart';
 import 'package:tourexplorer/feature/auth/domain/repository/auth_repository.dart';
 
 class SignUpUseCase extends UseCase<UserEntity, SignUpParams> {
+  //we cant pass email,pass,name instaed we use a sibnglr class
   final AuthRepository repository;
 
   SignUpUseCase(this.repository);
@@ -21,6 +22,7 @@ class SignUpUseCase extends UseCase<UserEntity, SignUpParams> {
   }
 }
 
+//instead of passing email,pass,name as seperate we created a generic
 class SignUpParams {
   final String email;
   final String password;
