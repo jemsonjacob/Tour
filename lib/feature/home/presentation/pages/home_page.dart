@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:tourexplorer/core/custom/app_colors.dart';
 import 'package:tourexplorer/core/custom/app_sizes.dart';
-
 import 'package:tourexplorer/feature/home/presentation/bloc/home_bloc.dart';
 import 'package:tourexplorer/feature/home/presentation/widgets/hero_image.dart';
 import 'package:tourexplorer/feature/home/presentation/widgets/home_header.dart';
@@ -25,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    context.read<HomeBloc>().add(const LoadHomePlacesEvent());
+    //context.read<HomeBloc>().add(const LoadHomePlacesEvent());
   }
 
   Future<void> _refresh() async {

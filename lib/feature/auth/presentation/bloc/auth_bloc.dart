@@ -40,7 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     });
 
-    //loginn event
+    //login event
     on<AuthLoginEvent>((event, emit) async {
       emit(AuthLoading());
 

@@ -56,7 +56,6 @@ class _SignupPageState extends State<SignupPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Register successful')),
             );
-
             Navigator.push(context, LoginPage.route());
           }
           if (state is AuthFailure) {

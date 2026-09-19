@@ -1,11 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:tourexplorer/core/exceptions/location_exceptions.dart';
 import 'package:tourexplorer/core/services/location_service.dart';
 import 'package:tourexplorer/feature/home/domain/entities/place_entity.dart';
 import 'package:tourexplorer/feature/home/domain/usecases/home_usecase.dart';
-
 part 'home_event.dart';
 part 'home_state.dart';
 

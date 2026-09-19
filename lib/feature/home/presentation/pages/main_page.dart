@@ -26,14 +26,17 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBloc>(create: (_) => sl<HomeBloc>()),
+        BlocProvider<HomeBloc>(
+          create: (_) => sl<HomeBloc>()..add(const LoadHomePlacesEvent()),
+        ),
+
         BlocProvider<ExploreBloc>(create: (_) => sl<ExploreBloc>()),
-        BlocProvider(
+
+        BlocProvider<SavedPlaceBloc>(
           create: (_) =>
               sl<SavedPlaceBloc>()..add(const LoadSavedPlacesEvent()),
         ),
       ],
-
       child: Builder(
         builder: (context) {
           return Scaffold(

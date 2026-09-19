@@ -25,8 +25,9 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'query': query,
         },
       );
-
+      // print(response);
       final List results = response.data['results'] ?? [];
+      //print(results);
       //{fsq_place_id: 4dcccf3cc65bdac71338ec38, latitude: 10.109629150846482,
       // longitude: 76.18783506514907,
       //categories: [{fsq_category_id: 4bf58dd8d48988d1e2941735, name: Beach, short_name: Beach,
@@ -43,8 +44,19 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           .map((e) => PlaceModel.fromJson(e as Map<String, dynamic>))
           .toList();
     } on DioException catch (e) {
+      // print('========== DIO ERROR ==========');
+      // print('Type: ${e.type}');
+      // print('Message: ${e.message}');
+      // print('Error: ${e.error}');
+      // print('Request URL: ${e.requestOptions.uri}');
+      // print('Status Code: ${e.response?.statusCode}');
+      // print('Response: ${e.response?.data}');
+      // print('================================');
+
       throw ServerException(
-        e.response?.data?['message']?.toString() ?? 'Failed to fetch places',
+        e.response?.data?['message']?.toString() ??
+            e.message ??
+            'Failed to fetch',
       );
     }
   }

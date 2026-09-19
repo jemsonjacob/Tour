@@ -1,6 +1,6 @@
 class ApiConstants {
   static const String apiKey =
-      "QG3PZR3PHERHRPS1MXMRFW0W1QIXQDNAWYVJZBJL3DOIIKH5";
+      "4RCSM4MV35N5CLN1X0CDFIW53Z30AMSLUZ4GGPMJZLZSFJR1";
   static const String baseUrl = "https://places-api.foursquare.com";
 }
 
